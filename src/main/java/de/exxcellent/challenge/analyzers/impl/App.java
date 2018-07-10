@@ -2,7 +2,7 @@ package de.exxcellent.challenge.analyzers.impl;
 
 import de.exxcellent.challenge.analyzers.Analyzer;
 import de.exxcellent.challenge.config.Configuration;
-import de.exxcellent.challenge.dataLoader.CsvLoader;
+import de.exxcellent.challenge.dataLoader.impl.CsvLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
  * @author Benjamin Schmid <benjamin.schmid@exxcellent.de>
  */
 public final class App implements Analyzer {
-    private Configuration config;
-    private CsvLoader csvLoader;
+    private static Configuration config;
+    private static CsvLoader csvLoader;
 
     public  App(Configuration config,CsvLoader csvLoader) throws IOException {
         this.config =config;
@@ -34,14 +34,12 @@ public final class App implements Analyzer {
             return "the list is empty";
         int smallest  =(int) Math.abs(Integer.parseInt(dayList.get(1)[1])-Integer.parseInt(dayList.get(1)[2]));
         int index = 1;
-//        System.out.println(smallest);
         for(int i = 2 ;i<dayList.size();i++) {
             int temp = (int) Math.abs(Integer.parseInt(dayList.get(i)[1]) - Integer.parseInt(dayList.get(i)[2]));
             if (smallest > temp) {
                 smallest = temp;
                 index = i;
             }
-//            System.out.println(temp);
 
         }
         return (index+1)+"";
@@ -56,14 +54,12 @@ public final class App implements Analyzer {
             return "the list is empty";
         int smallest  =(int) Math.abs(Integer.parseInt(footList.get(1)[5])-Integer.parseInt(footList.get(1)[6]));
         int index = 1;
-//        System.out.println(smallest);
         for(int i = 2 ;i<footList.size();i++) {
             int temp = (int) Math.abs(Integer.parseInt(footList.get(i)[5]) - Integer.parseInt(footList.get(i)[6]));
             if (smallest > temp) {
                 smallest = temp;
                 index = i;
             }
-//            System.out.println(temp);
 
         }
         return index+1+"";

@@ -6,12 +6,16 @@ import java.util.Properties;
 
 public class Configuration {
     private String appPath;
-    private Properties pathConfig = new Properties();;
+    private String csvPath;
+    private Properties appConfig = new Properties();;
+    private Properties csvConfig = new Properties();;
     private static Configuration instance;
     private Configuration(String appPath) throws IOException {
 
         this.appPath = appPath;
-        populateWithConfig(this.appPath,pathConfig);
+        populateWithConfig(this.appPath,appConfig);
+        this.csvPath = getappConfigProp("csvConfigPath");
+        populateWithConfig(this.csvPath,csvConfig);
 
 
     }
@@ -20,13 +24,16 @@ public class Configuration {
         instance = new Configuration(appPath);
 
     }
+
     public String getappConfigProp(String key) {
-        return pathConfig.getProperty(key);
+        return appConfig.getProperty(key);
+    }
+    public String getCsvConfigProp(String key) {
+        return csvConfig.getProperty(key);
     }
 
     private static void populateWithConfig(String configFilePath, Properties properties) throws IOException {
         FileInputStream inputStream = new FileInputStream(configFilePath);
-        System.out.println(inputStream+" "+properties);
         properties.load(inputStream);
         inputStream.close();
     }
