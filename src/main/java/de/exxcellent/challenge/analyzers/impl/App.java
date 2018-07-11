@@ -2,6 +2,7 @@ package de.exxcellent.challenge.analyzers.impl;
 
 import de.exxcellent.challenge.analyzers.Analyzer;
 import de.exxcellent.challenge.config.Configuration;
+import de.exxcellent.challenge.dataLoader.DataLoader;
 import de.exxcellent.challenge.dataLoader.impl.CsvLoader;
 
 import java.io.IOException;
@@ -15,19 +16,19 @@ import java.util.ArrayList;
  */
 public final class App implements Analyzer {
     private static Configuration config;
-    private static CsvLoader csvLoader;
+    private static DataLoader dataLoader;
 
-    public  App(Configuration config,CsvLoader csvLoader) throws IOException {
+    public  App(Configuration config,DataLoader csvLoader) throws IOException {
         this.config =config;
-        this.csvLoader = csvLoader;
-        this.csvLoader.readfootballFile();
-        this.csvLoader.readWeatherFile();
+        this.dataLoader = csvLoader;
+        this.dataLoader.readfootballFile();
+        this.dataLoader.readWeatherFile();
 
     }
     public String dayAnalysis(){
 
 
-        ArrayList<String[]> dayList = this.csvLoader.getWeatherFile();
+        ArrayList<String[]> dayList = this.dataLoader.getWeatherFile();
         if(dayList==null)
             return "the list was not initialized correctly";
         if(dayList.size()==1)
@@ -47,7 +48,7 @@ public final class App implements Analyzer {
     }
     public String footballAnalysis(){
         //5 6
-        ArrayList<String[]> footList = this.csvLoader.getFootballFile();
+        ArrayList<String[]> footList = this.dataLoader.getFootballFile();
         if(footList==null)
             return "the list was not initialized correctly";
             if(footList.size()==1)
